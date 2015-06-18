@@ -14,7 +14,7 @@ function jsZenEdit(textarea, title, placeholder) {
   self.textarea = $(textarea);
   self.textarea.attr('placeholder', placeholder);
 
-  self.editor = $('<div class="zeneditor"></div>');
+  self.editor = $('<div class="zeneditor dark-theme"></div>');
 
   var button = document.createElement('button');
   button.setAttribute('type','button');
