@@ -73,7 +73,11 @@ $(function () {
     editor = jsZenEdit(textarea, null, '');
   });
 
-  if (editor) {
-    editor.zen();
+  if ($('body').hasClass('controller-wiki')) {
+
+    if (editor) {
+      editor.zen();
+    }
+
   }
 });
