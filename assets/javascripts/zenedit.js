@@ -59,11 +59,21 @@ function jsZenEdit(textarea, title, placeholder) {
 
   self.editor.insertBefore(self.textarea);
   self.editor.prepend(self.textarea);
+
+  self.zen = function () {
+    button.onclick();
+  };
+
+  return self;
 }
 
 $(function () {
+  var editor = null;
   $('textarea').each(function (index, textarea) {
-    jsZenEdit(textarea, null, '');
+    editor = jsZenEdit(textarea, null, '');
   });
-});
 
+  if (editor) {
+    editor.zen();
+  }
+});
