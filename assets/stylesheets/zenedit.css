@@ -172,6 +172,9 @@ button.jstb_zenedit.save {
   overflow: auto;
   border: 1px solid #e4e4e4;
 }
+.zeneditor #preview p {
+  padding: 0;
+}
 .zeneditor #preview fieldset {
   background: none;
   border-width: 0px;
