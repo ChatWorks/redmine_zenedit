@@ -1,10 +1,10 @@
 function jsZenEdit(textarea, title, placeholder) {
   if (!document.createElement) { return; }
-  
+
   if (!textarea) { return; }
-  
+
   if ((typeof(document["selection"]) == "undefined")
-  && (typeof(textarea["setSelectionRange"]) == "undefined")) {
+   && (typeof(textarea["setSelectionRange"]) == "undefined")) {
     return;
   }
 
@@ -28,19 +28,13 @@ function jsZenEdit(textarea, title, placeholder) {
   button_theme.className = "jstb_zenedit theme";
   button_theme.title = title || "Zen";
 
-  document.onkeydown = function(evt) {
-      evt = evt || window.event;
-      if (evt.keyCode == 27) {
-          self.editor.removeClass('zen');
-          $html.removeClass('zen');
-      }
-  };
-
   button.onclick = function() { 
     try { 
-      $(this).parent('.zeneditor').toggleClass('zen'); 
-      self.textarea.removeAttr("style")
-      $html.toggleClass('zen');
+      if (self.editor.hasClass('zen')) {
+        self.editor.trigger('leave-zen');
+      } else {
+        self.editor.trigger('go-zen');
+      }
       self.textarea.focus();
     } catch (e) {} 
     return false; 
@@ -48,7 +42,7 @@ function jsZenEdit(textarea, title, placeholder) {
 
   button_theme.onclick = function() { 
     try { 
-      $(this).parent('.zeneditor').toggleClass('dark-theme'); 
+      self.editor.toggleClass('dark-theme'); 
       self.textarea.focus();
     } catch (e) {} 
     return false; 
@@ -64,6 +58,87 @@ function jsZenEdit(textarea, title, placeholder) {
     button.onclick();
   };
 
+  var zenKeyHandler = function(e) {
+    var keyCode = e.keyCode || e.which;
+
+    if (keyCode == 90 && e.ctrlKey) {
+      e.preventDefault();
+      self.editor.trigger('go-zen');
+    }
+  };
+  var zenESCHandler = function(e) {
+    var keyCode = e.keyCode || e.which;
+
+    if (keyCode == 27) {
+      e.preventDefault();
+      self.editor.trigger('leave-zen');
+    }
+  };
+
+  $(document).on('keydown', zenKeyHandler);
+  $(document).on('keydown', zenESCHandler);
+
+  self.editor.on('go-zen', function () {
+    self.editor.addClass('zen');
+    $html.addClass('zen');
+  });
+  self.editor.on('leave-zen', function () {
+    self.editor.removeClass('zen');
+    $html.removeClass('zen');
+  });
+
+  if ($('body').hasClass('controller-wiki')) {
+    var $preview = $('#preview');
+    var $anchor = $('<div id="preview-anchor"></div>').insertBefore($preview);
+    var stat = 'editing';
+
+    $(document).off('keydown', zenESCHandler);
+
+    var previewKeyHandler = function(e) {
+      var keyCode = e.keyCode || e.which;
+
+      if ((keyCode == 68 && e.ctrlKey)
+       || (keyCode == 69 && e.ctrlKey)) {
+        e.preventDefault();
+        if (stat == 'editing') {
+          self.editor.trigger('go-preview');
+        } else {
+          self.editor.trigger('leave-preview');
+        }
+      }
+
+      if (keyCode == 27) {
+        e.preventDefault();
+        if (stat == 'preview') {
+          self.editor.trigger('leave-preview');
+        } else {
+          self.editor.trigger('leave-zen');
+        }
+      }
+    };
+
+    self.editor.on('go-zen', function () {
+      $(document).on('keydown', previewKeyHandler);
+    });
+    self.editor.on('leave-zen', function () {
+      $(document).off('keydown', previewKeyHandler);
+      self.editor.trigger('leave-preview');
+    });
+
+    self.editor.on('go-preview', function () {
+      $('a[accesskey=r]').click();
+      self.textarea.hide();
+      $preview.insertBefore(self.textarea);
+      stat = 'preview';
+    });
+    self.editor.on('leave-preview', function () {
+      $preview.html('');
+      self.textarea.show().focus();
+      $preview.insertBefore($anchor);
+      stat = 'editing';
+    });
+  }
+
   return self;
 }
 
@@ -74,10 +149,8 @@ $(function () {
   });
 
   if ($('body').hasClass('controller-wiki')) {
-
     if (editor) {
       editor.zen();
     }
-
   }
 });
