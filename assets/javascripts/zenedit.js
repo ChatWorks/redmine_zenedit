@@ -134,7 +134,11 @@ function jsZenEdit(textarea, title, placeholder) {
         if (stat == 'preview') {
           self.editor.trigger('leave-preview');
         } else {
-          self.editor.trigger('leave-zen');
+          if (history.length) {
+            history.back();
+          } else {
+            self.editor.trigger('leave-zen');
+          }
         }
       }
     };
