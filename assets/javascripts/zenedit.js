@@ -79,6 +79,7 @@ function jsZenEdit(textarea, title, placeholder) {
     if (keyCode == 83 && e.ctrlKey) {
       e.preventDefault();
       if (confirm('Save ?')) {
+        self.textarea.blur();
         self.editor.closest('form').submit();
       }
     }
