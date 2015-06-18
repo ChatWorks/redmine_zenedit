@@ -28,6 +28,7 @@ function jsZenEdit(textarea, title, placeholder) {
   button_theme.className = "jstb_zenedit theme";
   button_theme.title = "Switch theme";
 
+  var button_back = $('<button class="jstb_zenedit back" title="Back: ESC"></button>');
   var button_preview = $('<button class="jstb_zenedit preview" title="Preview: Ctrl + d"></button>');
   var button_help = $('<button class="jstb_zenedit help" title="Help: Ctrl + h"></button>');
   var button_save = $('<button class="jstb_zenedit save" title="Save: Ctrl + s"></button>');
@@ -56,8 +57,13 @@ function jsZenEdit(textarea, title, placeholder) {
     self.editor.closest('form').submit();
   });
 
+  button_back.on('click', function () {
+    self.editor.trigger('leave-zen');
+  });
+
   self.editor.append(button);
   self.editor.append(button_theme);
+  self.editor.append(button_back);
   self.editor.append(button_preview);
   self.editor.append(button_help);
   self.editor.append(button_save);
@@ -109,6 +115,15 @@ function jsZenEdit(textarea, title, placeholder) {
     var $preview = $('#preview');
     var $anchor = $('<div id="preview-anchor"></div>').insertBefore($preview);
     var stat = 'editing';
+
+    button_back.off('click');
+    button_back.on('click', function () {
+      if (history.length) {
+        history.back();
+      } else {
+        self.editor.trigger('leave-zen');
+      }
+    });
 
     $(document).off('keydown', zenESCHandler);
 

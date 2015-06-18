@@ -73,6 +73,7 @@ button.jstb_zenedit:hover {
 
 button.jstb_zenedit {
   background-image: url(../images/ic_fullscreen_black_48dp_1x.png);
+  cursor: pointer;
 }
 
 .zen button.jstb_zenedit {
@@ -96,12 +97,19 @@ button.jstb_zenedit.save {
   background-image: url(../images/ic_save_black_48dp_1x.png);
   display: none;
 }
+button.jstb_zenedit.back {
+  background-image: url(../images/ic_cancel_black_48dp_1x.png);
+  display: none;
+}
 
 .zen .dark-theme button.jstb_zenedit {
   background-image: url(../images/ic_fullscreen_exit_white_48dp_1x.png);
 }
 .dark-theme button.jstb_zenedit.theme {
   background-image: url(../images/ic_invert_colors_white_48dp_1x.png);
+}
+.dark-theme button.jstb_zenedit.back {
+  background-image: url(../images/ic_cancel_white_48dp_1x.png);
 }
 .dark-theme button.jstb_zenedit.preview {
   background-image: url(../images/ic_description_white_48dp_1x.png);
@@ -116,6 +124,10 @@ button.jstb_zenedit.save {
 .zeneditor.zen button.jstb_zenedit.theme {
   display: inline;
   top: 60px;
+}
+.zeneditor.zen button.jstb_zenedit.back {
+  display: inline;
+  top: 168px;
 }
 .zeneditor.zen button.jstb_zenedit.preview {
 }
@@ -134,6 +146,9 @@ button.jstb_zenedit.save {
 .controller-wiki .zeneditor.zen button.jstb_zenedit.save {
   display: inline;
   top: 168px;
+}
+.controller-wiki .zeneditor.zen button.jstb_zenedit.back {
+  top: 222px;
 }
 
 .zeneditor.zen.dark-theme , .zeneditor.zen.dark-theme textarea {
