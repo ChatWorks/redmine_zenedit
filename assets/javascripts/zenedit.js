@@ -26,7 +26,11 @@ function jsZenEdit(textarea, title, placeholder) {
   button_theme.setAttribute('type','button');
   button_theme.tabIndex = 200;
   button_theme.className = "jstb_zenedit theme";
-  button_theme.title = title || "Zen";
+  button_theme.title = "Switch theme";
+
+  var button_preview = $('<button class="jstb_zenedit preview" title="Preview: Ctrl + d"></button>');
+  var button_help = $('<button class="jstb_zenedit help" title="Help: Ctrl + h"></button>');
+  var button_save = $('<button class="jstb_zenedit save" title="Save: Ctrl + s"></button>');
 
   button.onclick = function() { 
     try { 
@@ -48,10 +52,17 @@ function jsZenEdit(textarea, title, placeholder) {
     return false; 
   };  
 
+  button_save.on('click', function () {
+    self.editor.closest('form').submit();
+  });
+
   self.editor.append(button);
   self.editor.append(button_theme);
+  self.editor.append(button_preview);
+  self.editor.append(button_help);
+  self.editor.append(button_save);
 
-  self.editor.insertBefore(self.textarea);
+  self.editor.insertAfter(self.textarea);
   self.editor.prepend(self.textarea);
 
   self.zen = function () {
@@ -63,7 +74,13 @@ function jsZenEdit(textarea, title, placeholder) {
 
     if (keyCode == 90 && e.ctrlKey) {
       e.preventDefault();
-      self.editor.trigger('go-zen');
+      button.onclick();
+    }
+    if (keyCode == 83 && e.ctrlKey) {
+      e.preventDefault();
+      if (confirm('Save ?')) {
+        self.editor.closest('form').submit();
+      }
     }
   };
   var zenESCHandler = function(e) {
@@ -94,17 +111,23 @@ function jsZenEdit(textarea, title, placeholder) {
 
     $(document).off('keydown', zenESCHandler);
 
+    var togglePreview = function (e) {
+      if (stat == 'editing') {
+        self.editor.trigger('go-preview');
+      } else {
+        self.editor.trigger('leave-preview');
+      }
+      e.preventDefault();
+    };
+
+    button_preview.on('click', togglePreview);
+
     var previewKeyHandler = function(e) {
       var keyCode = e.keyCode || e.which;
 
       if ((keyCode == 68 && e.ctrlKey)
        || (keyCode == 69 && e.ctrlKey)) {
-        e.preventDefault();
-        if (stat == 'editing') {
-          self.editor.trigger('go-preview');
-        } else {
-          self.editor.trigger('leave-preview');
-        }
+        togglePreview(e);
       }
 
       if (keyCode == 27) {

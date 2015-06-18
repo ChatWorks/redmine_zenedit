@@ -20,6 +20,12 @@ html.zen {
   padding-top: 20px;
   padding-bottom: 20px;
 }
+.zeneditor textarea {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+}
 
 .zeneditor.zen textarea {
   -webkit-box-sizing: border-box;
@@ -47,35 +53,87 @@ html.zen {
   color: #333333;
 }
 
-button.jstb_zenedit, button.jstb_zenedit.theme {
-  background-image: url(../images/fullscreen.png);
+button.jstb_zenedit {
+  background: none;
   width: 24px;
   height: 24px;
-  padding: 4px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #ddd;
-  background-color: #f7f7f7;
   background-position: 50% 50%;
   background-repeat: no-repeat;
+  background-size: cover;
+  border: none;
   position: absolute;
-  right: 5px;
-  top: 5px;
-  opacity: 0.5;
+  right: 6px;
+  top: 6px;
+  opacity: 0.3;
 }
 
 button.jstb_zenedit:hover {
   opacity: 1;
 }
 
+button.jstb_zenedit {
+  background-image: url(../images/ic_fullscreen_black_48dp_1x.png);
+}
+
+.zen button.jstb_zenedit {
+  background-image: url(../images/ic_fullscreen_exit_black_48dp_1x.png);
+  width: 48px;
+  height: 48px;
+}
 button.jstb_zenedit.theme {
-  background-image: url(../images/theme.png);
+  background-image: url(../images/ic_invert_colors_black_48dp_1x.png);
   display: none;
+}
+button.jstb_zenedit.preview {
+  background-image: url(../images/ic_description_black_48dp_1x.png);
+  display: none;
+}
+button.jstb_zenedit.help {
+  background-image: url(../images/ic_help_black_48dp_1x.png);
+  display: none;
+}
+button.jstb_zenedit.save {
+  background-image: url(../images/ic_save_black_48dp_1x.png);
+  display: none;
+}
+
+.zen .dark-theme button.jstb_zenedit {
+  background-image: url(../images/ic_fullscreen_exit_white_48dp_1x.png);
+}
+.dark-theme button.jstb_zenedit.theme {
+  background-image: url(../images/ic_invert_colors_white_48dp_1x.png);
+}
+.dark-theme button.jstb_zenedit.preview {
+  background-image: url(../images/ic_description_white_48dp_1x.png);
+}
+.dark-theme button.jstb_zenedit.help {
+  background-image: url(../images/ic_help_white_48dp_1x.png);
+}
+.dark-theme button.jstb_zenedit.save {
+  background-image: url(../images/ic_save_white_48dp_1x.png);
 }
 
 .zeneditor.zen button.jstb_zenedit.theme {
   display: inline;
-  top: 35px;
+  top: 60px;
+}
+.zeneditor.zen button.jstb_zenedit.preview {
+}
+.zeneditor.zen button.jstb_zenedit.help {
+}
+.zeneditor.zen button.jstb_zenedit.save {
+  display: inline;
+  top: 114px;
+}
+.controller-wiki .zeneditor.zen button.jstb_zenedit.preview {
+  display: inline;
+  top: 114px;
+}
+.controller-wiki .zeneditor.zen button.jstb_zenedit.help {
+}
+.controller-wiki .zeneditor.zen button.jstb_zenedit.save {
+  display: inline;
+  top: 168px;
 }
 
 .zeneditor.zen.dark-theme , .zeneditor.zen.dark-theme textarea {
