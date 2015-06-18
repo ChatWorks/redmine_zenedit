@@ -145,7 +145,7 @@ function jsZenEdit(textarea, title, placeholder) {
 $(function () {
   var editor = null;
   $('textarea').each(function (index, textarea) {
-    editor = jsZenEdit(textarea, null, '');
+    editor = new jsZenEdit(textarea, null, '');
   });
 
   if ($('body').hasClass('controller-wiki')) {
