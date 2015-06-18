@@ -1,3 +1,4 @@
+.zeneditor,
 .jstEditor {
   position: relative;
 }
@@ -6,7 +7,7 @@ html.zen {
   overflow: hidden;
 }
 
-.jstEditor.zen {
+.zeneditor.zen {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -16,16 +17,17 @@ html.zen {
   text-shadow: none;
   z-index: 1000;
   text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
-.jstEditor.zen textarea {
+.zeneditor.zen textarea {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  padding: 20px;
-  margin-top: 20px;
+  padding: 0;
   border: 0;
   background: #fff;
   color: #999999;
@@ -41,7 +43,7 @@ html.zen {
   overflow: auto;
 }
 
-.jstEditor.zen textarea:active, .jstEditor.zen textarea:hover,  .jstEditor.zen textarea:focus {
+.zeneditor.zen textarea:active, .zeneditor.zen textarea:hover,  .zeneditor.zen textarea:focus {
   color: #333333;
 }
 
@@ -71,19 +73,19 @@ button.jstb_zenedit.theme {
   display: none;
 }
 
-.jstEditor.zen button.jstb_zenedit.theme {
+.zeneditor.zen button.jstb_zenedit.theme {
   display: inline;
   top: 35px;
 }
 
-.jstEditor.zen.dark-theme , .jstEditor.zen.dark-theme textarea {
+.zeneditor.zen.dark-theme , .zeneditor.zen.dark-theme textarea {
   background: #1d1f21;
 }
 
-.jstEditor.zen.dark-theme textarea {
+.zeneditor.zen.dark-theme textarea {
   color: #a4b1b1;
 }
 
-.jstEditor.zen.dark-theme textarea:hover, .jstEditor.zen.dark-theme textarea:active, .jstEditor.zen.dark-theme textarea:focus {
+.zeneditor.zen.dark-theme textarea:hover, .zeneditor.zen.dark-theme textarea:active, .zeneditor.zen.dark-theme textarea:focus {
   color: #dbe0e0;
 }

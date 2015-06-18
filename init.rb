@@ -1,4 +1,6 @@
+require 'redmine'
 require 'redmine_zenedit'
+require 'redmine_zenedit/hooks/view_layouts_base_html_head'
 
 Redmine::Plugin.register :redmine_zenedit do
   name 'Redmine Zen Edit plugin'

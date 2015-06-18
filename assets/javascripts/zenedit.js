@@ -7,9 +7,14 @@ function jsZenEdit(textarea, title, placeholder) {
   && (typeof(textarea["setSelectionRange"]) == "undefined")) {
     return;
   }
-  this.textarea = textarea
-  this.textarea.setAttribute('placeholder', placeholder);
-  this.editor = this.textarea.parentNode
+
+  var $html = $('html');
+  var self = this;
+
+  self.textarea = $(textarea);
+  self.textarea.attr('placeholder', placeholder);
+
+  self.editor = $('<div class="zeneditor"></div>');
 
   var button = document.createElement('button');
   button.setAttribute('type','button');
@@ -26,29 +31,39 @@ function jsZenEdit(textarea, title, placeholder) {
   document.onkeydown = function(evt) {
       evt = evt || window.event;
       if (evt.keyCode == 27) {
-          $('.jstEditor.zen').removeClass('zen');
-          $('html.zen').removeClass('zen');
+          self.editor.removeClass('zen');
+          $html.removeClass('zen');
       }
   };
 
   button.onclick = function() { 
     try { 
-      $(this).parent('.jstEditor').toggleClass('zen'); 
-      $(textarea).removeAttr("style")
-      $('html').toggleClass('zen');
-      $(textarea).focus();
+      $(this).parent('.zeneditor').toggleClass('zen'); 
+      self.textarea.removeAttr("style")
+      $html.toggleClass('zen');
+      self.textarea.focus();
     } catch (e) {} 
     return false; 
   };
 
   button_theme.onclick = function() { 
     try { 
-      $(this).parent('.jstEditor').toggleClass('dark-theme'); 
-      $(textarea).focus();
+      $(this).parent('.zeneditor').toggleClass('dark-theme'); 
+      self.textarea.focus();
     } catch (e) {} 
     return false; 
   };  
 
-  this.editor.appendChild(button);
-  this.editor.appendChild(button_theme);
+  self.editor.append(button);
+  self.editor.append(button_theme);
+
+  self.editor.insertBefore(self.textarea);
+  self.editor.prepend(self.textarea);
 }
+
+$(function () {
+  $('textarea').each(function (index, textarea) {
+    jsZenEdit(textarea);
+  });
+});
+
