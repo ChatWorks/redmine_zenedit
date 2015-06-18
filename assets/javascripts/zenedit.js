@@ -63,7 +63,7 @@ function jsZenEdit(textarea, title, placeholder) {
 
 $(function () {
   $('textarea').each(function (index, textarea) {
-    jsZenEdit(textarea);
+    jsZenEdit(textarea, null, '');
   });
 });
 
