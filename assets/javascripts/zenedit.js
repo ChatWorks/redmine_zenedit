@@ -20,7 +20,7 @@ function jsZenEdit(textarea, title, placeholder) {
   button.setAttribute('type','button');
   button.tabIndex = 200;
   button.className = "jstb_zenedit";
-  button.title = title || "Zen";
+  button.title = "Zen: Ctrl + e";
 
   var button_theme = document.createElement('button');
   button_theme.setAttribute('type','button');
@@ -72,7 +72,7 @@ function jsZenEdit(textarea, title, placeholder) {
   var zenKeyHandler = function(e) {
     var keyCode = e.keyCode || e.which;
 
-    if (keyCode == 90 && e.ctrlKey) {
+    if (keyCode == 69 && e.ctrlKey) {
       e.preventDefault();
       button.onclick();
     }
@@ -125,8 +125,7 @@ function jsZenEdit(textarea, title, placeholder) {
     var previewKeyHandler = function(e) {
       var keyCode = e.keyCode || e.which;
 
-      if ((keyCode == 68 && e.ctrlKey)
-       || (keyCode == 69 && e.ctrlKey)) {
+      if (keyCode == 68 && e.ctrlKey) {
         togglePreview(e);
       }
 
