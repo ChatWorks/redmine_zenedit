@@ -16,24 +16,16 @@ function jsZenEdit(textarea, title, placeholder) {
 
   self.editor = $('<div class="zeneditor dark-theme"></div>');
 
-  var button = document.createElement('button');
-  button.setAttribute('type','button');
-  button.tabIndex = 200;
-  button.className = "jstb_zenedit";
-  button.title = "Zen: Ctrl + e";
+  var controls = $('<div class="jstb_zenedit_controls"></div>');
 
-  var button_theme = document.createElement('button');
-  button_theme.setAttribute('type','button');
-  button_theme.tabIndex = 200;
-  button_theme.className = "jstb_zenedit theme";
-  button_theme.title = "Switch theme";
-
+  var button_toggle = $('<button class="jstb_zenedit toggle" title="Toggle Zen Mode: Ctrl + E"></button>');
+  var button_theme = $('<button class="jstb_zenedit theme" title="Switch theme"></button>');
   var button_back = $('<button class="jstb_zenedit back" title="Back: ESC"></button>');
-  var button_preview = $('<button class="jstb_zenedit preview" title="Preview: Ctrl + d"></button>');
-  var button_help = $('<button class="jstb_zenedit help" title="Help: Ctrl + h"></button>');
-  var button_save = $('<button class="jstb_zenedit save" title="Save: Ctrl + s"></button>');
+  var button_preview = $('<button class="jstb_zenedit preview" title="Preview: Ctrl + D"></button>');
+  var button_help = $('<button class="jstb_zenedit help" title="Help: Ctrl + H"></button>');
+  var button_save = $('<button class="jstb_zenedit save" title="Save: Ctrl + S"></button>');
 
-  button.onclick = function() { 
+  button_toggle.on('click', function() { 
     try { 
       if (self.editor.hasClass('zen')) {
         self.editor.trigger('leave-zen');
@@ -43,15 +35,15 @@ function jsZenEdit(textarea, title, placeholder) {
       self.textarea.focus();
     } catch (e) {} 
     return false; 
-  };
+  });
 
-  button_theme.onclick = function() { 
+  button_theme.on('click', function() { 
     try { 
       self.editor.toggleClass('dark-theme'); 
       self.textarea.focus();
     } catch (e) {} 
     return false; 
-  };  
+  });
 
   button_save.on('click', function () {
     self.editor.closest('form').submit();
@@ -61,18 +53,20 @@ function jsZenEdit(textarea, title, placeholder) {
     self.editor.trigger('leave-zen');
   });
 
-  self.editor.append(button);
-  self.editor.append(button_theme);
-  self.editor.append(button_back);
-  self.editor.append(button_preview);
-  self.editor.append(button_help);
-  self.editor.append(button_save);
+  controls.append(button_back);
+  controls.append(button_toggle);
+  controls.append(button_theme);
+  controls.append(button_preview);
+  // controls.append(button_help);
+  controls.append(button_save);
+
+  self.editor.append(controls);
 
   self.editor.insertAfter(self.textarea);
   self.editor.prepend(self.textarea);
 
   self.zen = function () {
-    button.onclick();
+    button_toggle.trigger('click');
   };
 
   var zenKeyHandler = function(e) {
@@ -80,7 +74,7 @@ function jsZenEdit(textarea, title, placeholder) {
 
     if (keyCode == 69 && e.ctrlKey) {
       e.preventDefault();
-      button.onclick();
+      button_toggle.trigger('click');
     }
     if (keyCode == 83 && e.ctrlKey) {
       e.preventDefault();
