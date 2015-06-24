@@ -166,9 +166,6 @@ button.jstb_zenedit.back {
   padding: 0;
   border: 0;
   background: #f6f6f6;
-  color: #999999;
-  font-size: 18px;
-  line-height: 1.6em;
   resize: none;
   -moz-transition: color 0.15s ease-in 0;
   -webkit-transition: color 0.15s ease-in 0;
@@ -186,4 +183,8 @@ button.jstb_zenedit.back {
   background: none;
   border-width: 0px;
   border-top-width: 1px;
+}
+
+fieldset.preview {
+  min-width: 0;
 }
