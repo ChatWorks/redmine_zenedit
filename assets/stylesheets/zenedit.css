@@ -64,6 +64,9 @@ html.zen {
 .zen .jstb_zenedit_controls {
   width: 48px;
 }
+.zeneditor.zen.dark-theme .jstb_zenedit_controls {
+  background-color: rgba(29,31,33,0.3);
+}
 
 button.jstb_zenedit {
   display: block;
