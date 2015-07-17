@@ -106,7 +106,7 @@ button.jstb_zenedit.preview {
   display: none;
 }
 button.jstb_zenedit.help {
-  background-image: url(../images/ic_help_black_48dp_1x.png);
+  background-image: url(../images/ic_help_outline_black_48dp_1x.png);
   display: none;
 }
 button.jstb_zenedit.save {
@@ -131,7 +131,7 @@ button.jstb_zenedit.back {
   background-image: url(../images/ic_description_white_48dp_1x.png);
 }
 .dark-theme button.jstb_zenedit.help {
-  background-image: url(../images/ic_help_white_48dp_1x.png);
+  background-image: url(../images/ic_help_outline_white_48dp_1x.png);
 }
 .dark-theme button.jstb_zenedit.save {
   background-image: url(../images/ic_save_white_48dp_1x.png);

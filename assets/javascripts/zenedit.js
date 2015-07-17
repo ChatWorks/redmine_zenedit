@@ -45,6 +45,13 @@ function jsZenEdit(textarea, title, placeholder) {
     return false; 
   });
 
+  button_help.on('click', function() { 
+    try { 
+      window.open('http://pages.tzengyuxio.me/pandoc/', '_blank');
+    } catch (e) {} 
+    return false; 
+  });
+
   button_save.on('click', function () {
     self.editor.closest('form').submit();
   });
@@ -57,7 +64,7 @@ function jsZenEdit(textarea, title, placeholder) {
   controls.append(button_toggle);
   controls.append(button_theme);
   controls.append(button_preview);
-  // controls.append(button_help);
+  controls.append(button_help);
   controls.append(button_save);
 
   self.editor.append(controls);
