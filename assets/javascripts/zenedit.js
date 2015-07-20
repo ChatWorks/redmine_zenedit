@@ -87,6 +87,10 @@ var jsZenEdit = function (textarea, title, placeholder) {
       e.preventDefault();
       button_toggle.trigger('click');
     }
+    if (keyCode == 74 && e.ctrlKey) {
+      e.preventDefault();
+      button_help.trigger('click');
+    }
     if (keyCode == 83 && e.ctrlKey) {
       e.preventDefault();
       if (confirm('Save ?')) {
