@@ -1,4 +1,4 @@
-function jsZenEdit(textarea, title, placeholder) {
+var jsZenEdit = function (textarea, title, placeholder) {
   if (!document.createElement) { return; }
 
   if (!textarea) { return; }
@@ -22,7 +22,7 @@ function jsZenEdit(textarea, title, placeholder) {
   var button_theme = $('<button class="jstb_zenedit theme" title="Switch theme"></button>');
   var button_back = $('<button class="jstb_zenedit back" title="Back: ESC"></button>');
   var button_preview = $('<button class="jstb_zenedit preview" title="Preview: Ctrl + D"></button>');
-  var button_help = $('<button class="jstb_zenedit help" title="Help"></button>');
+  var button_help = $('<button class="jstb_zenedit help" title="Help: Ctrl + J"></button>');
   var button_save = $('<button class="jstb_zenedit save" title="Save: Ctrl + S"></button>');
 
   button_toggle.on('click', function() { 
@@ -45,11 +45,15 @@ function jsZenEdit(textarea, title, placeholder) {
     return false; 
   });
 
+  var helping = false;
+
   button_help.on('click', function() { 
-    try { 
-      window.open('http://pages.tzengyuxio.me/pandoc/', '_blank');
-    } catch (e) {} 
+    jsZenEdit.$help.addClass('active');
+    helping = true;
     return false; 
+  });
+  self.editor.on('leave-help', function () {
+    helping = false;
   });
 
   button_save.on('click', function () {
@@ -96,7 +100,11 @@ function jsZenEdit(textarea, title, placeholder) {
 
     if (keyCode == 27) {
       e.preventDefault();
-      self.editor.trigger('leave-zen');
+      if (helping) {
+        jsZenEdit.$help.trigger('click');
+      } else {
+        self.editor.trigger('leave-zen');
+      }
     }
   };
 
@@ -104,6 +112,7 @@ function jsZenEdit(textarea, title, placeholder) {
   $(document).on('keydown', zenESCHandler);
 
   self.editor.on('go-zen', function () {
+    jsZenEdit.help(self.editor);
     self.editor.addClass('zen');
     $html.addClass('zen');
   });
@@ -152,22 +161,29 @@ function jsZenEdit(textarea, title, placeholder) {
 
       if (keyCode == 27) {
         e.preventDefault();
-        if (stat == 'preview') {
-          self.editor.trigger('leave-preview');
+        if (helping) {
+          jsZenEdit.$help.trigger('click');
         } else {
-          if (history.length) {
-            history.back();
+          if (stat == 'preview') {
+            self.editor.trigger('leave-preview');
           } else {
-            self.editor.trigger('leave-zen');
+            if (history.length) {
+              history.back();
+            } else {
+              self.editor.trigger('leave-zen');
+            }
           }
         }
       }
     };
 
     self.editor.on('go-zen', function () {
+      jsZenEdit.editor = self.editor;
+      jsZenEdit.help(self.editor);
       $(document).on('keydown', previewKeyHandler);
     });
     self.editor.on('leave-zen', function () {
+      jsZenEdit.editor = null;
       $(document).off('keydown', previewKeyHandler);
       self.editor.trigger('leave-preview');
     });
@@ -188,6 +204,26 @@ function jsZenEdit(textarea, title, placeholder) {
 
   return self;
 }
+
+jsZenEdit.registerHelp = function (content) {
+  var $help = $('<div class="jstb_zenedit_help"></div>');
+  $help.html(content);
+  $help.on('click', function () {
+    jsZenEdit.editor.trigger('leave-help');
+    $help.removeClass('active');
+  });
+  $help.on('click', '.help-box', function (event) {
+    event.stopPropagation();
+  });
+  jsZenEdit.$help = $help;
+  if (jsZenEdit.editor) { jsZenEdit.help(jsZenEdit.editor); }
+};
+jsZenEdit.help = function (editor) {
+  var $help = jsZenEdit.$help;
+  if ($help) {
+    editor.append($help);
+  }
+};
 
 $(function () {
   var editor = null;

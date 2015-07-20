@@ -191,3 +191,91 @@ button.jstb_zenedit.back {
 fieldset.preview {
   min-width: 0;
 }
+
+.jstb_zenedit_help {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: #ccc;
+  background-color: rgba(8,8,8,0.4);
+  display: none;
+}
+.jstb_zenedit_help.active {
+  display: block;
+}
+.jstb_zenedit_help > div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -250px;
+  margin-left: -250px;
+  height: 500px;
+  width: 500px;
+  text-align: left;
+  background-color: #111;
+  box-sizing: border-box;
+  border: 1px solid #888;
+}
+.jstb_zenedit_help > div > nav {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  box-sizing: border-box;
+  background: #000;
+}
+.jstb_zenedit_help > div > nav a {
+  font-size: 13px;
+  color: #69f;
+  display: inline-block;
+  margin-right: 6px;
+}
+.jstb_zenedit_help > div > nav a[target] {
+  float: right;
+  margin-right: 0;
+}
+.jstb_zenedit_help > div > nav a:hover {
+  text-decoration: underline;
+}
+.jstb_zenedit_help > div > nav a.active {
+  color: #fff;
+}
+.jstb_zenedit_help .content {
+  overflow-y: scroll;
+  height: 498px;
+  box-sizing: border-box;
+}
+.jstb_zenedit_help section:first-child {
+  display: block;
+}
+.jstb_zenedit_help section {
+  padding: 20px 10px 10px;
+  /* display: none; */
+}
+.jstb_zenedit_help section h4 {
+  padding-top: 20px;
+  color: #fff;
+  font-size: larger;
+  padding-bottom: 3px;
+  border-bottom: 1px solid #333;
+}
+.jstb_zenedit_help section h5 {
+  font-size: larger;
+  padding-bottom: 3px;
+  border-bottom: 1px solid #333;
+
+}
+.jstb_zenedit_help p {
+  padding: 0;
+  line-height: 1.8;
+}
+.jstb_zenedit_help pre {
+  border: 1px solid #ccc;
+  padding: 4px 8px;
+  font-size: smaller;
+  background-color: #223;
+}
+
