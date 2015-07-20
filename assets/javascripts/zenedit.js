@@ -22,7 +22,7 @@ function jsZenEdit(textarea, title, placeholder) {
   var button_theme = $('<button class="jstb_zenedit theme" title="Switch theme"></button>');
   var button_back = $('<button class="jstb_zenedit back" title="Back: ESC"></button>');
   var button_preview = $('<button class="jstb_zenedit preview" title="Preview: Ctrl + D"></button>');
-  var button_help = $('<button class="jstb_zenedit help" title="Help: Ctrl + H"></button>');
+  var button_help = $('<button class="jstb_zenedit help" title="Help"></button>');
   var button_save = $('<button class="jstb_zenedit save" title="Save: Ctrl + S"></button>');
 
   button_toggle.on('click', function() { 
@@ -113,9 +113,6 @@ function jsZenEdit(textarea, title, placeholder) {
   });
 
   if ($('body').hasClass('controller-wiki')) {
-    var $preview = $('#preview');
-    var $anchor = $('<div id="preview-anchor"></div>').insertBefore($preview);
-    var stat = 'editing';
 
     button_back.off('click');
     button_back.on('click', function () {
@@ -127,6 +124,13 @@ function jsZenEdit(textarea, title, placeholder) {
     });
 
     $(document).off('keydown', zenESCHandler);
+
+  }
+
+  if ($('a[accesskey=r]').length) {
+    var $preview = $('#preview');
+    var $anchor = $('<div id="preview-anchor"></div>').insertBefore($preview);
+    var stat = 'editing';
 
     var togglePreview = function (e) {
       if (stat == 'editing') {
