@@ -132,8 +132,9 @@ var jsZenEdit = function (textarea, title, placeholder) {
 
     button_back.off('click');
     button_back.on('click', function () {
-      if (history.length) {
-        history.back();
+      if (/edit$/.test(document.location.pathname)) {
+        document.location.hash = '';
+        document.location.pathname = document.location.pathname.replace(/edit$/, '');
       } else {
         self.editor.trigger('leave-zen');
       }
@@ -174,8 +175,9 @@ var jsZenEdit = function (textarea, title, placeholder) {
           if (stat == 'preview') {
             self.editor.trigger('leave-preview');
           } else {
-            if (history.length) {
-              history.back();
+            if (/edit$/.test(document.location.pathname)) {
+              document.location.hash = '';
+              document.location.pathname = document.location.pathname.replace(/edit$/, '');
             } else {
               self.editor.trigger('leave-zen');
             }
