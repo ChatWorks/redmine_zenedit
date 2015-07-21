@@ -22,7 +22,7 @@ var jsZenEdit = function (textarea, title, placeholder) {
   var button_theme = $('<button class="jstb_zenedit theme" title="Switch theme"></button>');
   var button_back = $('<button class="jstb_zenedit back" title="Back: ESC"></button>');
   var button_preview = $('<button class="jstb_zenedit preview" title="Preview: Ctrl + D"></button>');
-  var button_help = $('<button class="jstb_zenedit help" title="Help: Ctrl + J"></button>');
+  var button_help = $('<button class="jstb_zenedit help" title="Format Help: Ctrl + J"></button>');
   var button_save = $('<button class="jstb_zenedit save" title="Save: Ctrl + S"></button>');
 
   button_toggle.on('click', function() { 
@@ -47,6 +47,9 @@ var jsZenEdit = function (textarea, title, placeholder) {
 
   var helping = false;
 
+  if (jsZenEdit.$help) {
+    button_help.addClass('available');
+  }
   button_help.on('click', function() { 
     jsZenEdit.$help.addClass('active');
     helping = true;
@@ -225,6 +228,7 @@ jsZenEdit.registerHelp = function (content) {
 jsZenEdit.help = function (editor) {
   var $help = jsZenEdit.$help;
   if ($help) {
+    editor.find('button.help').addClass('available');
     editor.append($help);
   }
 };

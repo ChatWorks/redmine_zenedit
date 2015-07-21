@@ -141,7 +141,7 @@ button.jstb_zenedit.back {
 .zeneditor.zen button.jstb_zenedit.theme,
 .zeneditor.zen button.jstb_zenedit.back,
 .zeneditor.zen button.jstb_zenedit.preview,
-.zeneditor.zen button.jstb_zenedit.help,
+.zeneditor.zen button.jstb_zenedit.help.available,
 .zeneditor.zen button.jstb_zenedit.save {
   display: block;
 }
