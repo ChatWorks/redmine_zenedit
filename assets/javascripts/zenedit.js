@@ -32,7 +32,10 @@ function jsZenEdit(textarea, title, placeholder) {
   };
 
   button.onclick = function() { 
-    try { 
+    try {
+      if($(this).parent('.jstEditor').hasClass('zen')) {
+          $('#sidebar').css('z-index', '-1');
+      }
       $(this).parent('.jstEditor').toggleClass('zen'); 
       $(textarea).removeAttr("style")
       $('html').toggleClass('zen');
