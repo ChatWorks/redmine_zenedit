@@ -1,57 +1,60 @@
 function jsZenEdit(textarea, title, placeholder) {
-  if (!document.createElement) { return; }
-  
-  if (!textarea) { return; }
-  
-  if ((typeof(document["selection"]) == "undefined")
-  && (typeof(textarea["setSelectionRange"]) == "undefined")) {
-    return;
-  }
-  this.textarea = textarea
-  this.textarea.setAttribute('placeholder', placeholder);
-  this.editor = this.textarea.parentNode
+    if (!document.createElement) { return; }
 
-  var button = document.createElement('button');
-  button.setAttribute('type','button');
-  button.tabIndex = 200;
-  button.className = "jstb_zenedit";
-  button.title = title || "Zen";
+    if (!textarea) { return; }
 
-  var button_theme = document.createElement('button');
-  button_theme.setAttribute('type','button');
-  button_theme.tabIndex = 200;
-  button_theme.className = "jstb_zenedit theme";
-  button_theme.title = title || "Zen";
+    if ((typeof(document["selection"]) == "undefined")
+        && (typeof(textarea["setSelectionRange"]) == "undefined")) {
+        return;
+    }
+    this.textarea = textarea
+    this.textarea.setAttribute('placeholder', placeholder);
+    this.editor = this.textarea.parentNode
 
-  document.onkeydown = function(evt) {
-      evt = evt || window.event;
-      if (evt.keyCode == 27) {
-          $('.jstEditor.zen').removeClass('zen');
-          $('html.zen').removeClass('zen');
-      }
-  };
+    var button = document.createElement('button');
+    button.setAttribute('type','button');
+    button.tabIndex = 200;
+    button.className = "jstb_zenedit";
+    button.title = title || "Zen";
 
-  button.onclick = function() { 
-    try {
-      if($(this).parent('.jstEditor').hasClass('zen')) {
-          $('#sidebar').css('z-index', '-1');
-      }
-      $(this).parent('.jstEditor').toggleClass('zen'); 
-      $(textarea).removeAttr("style")
-      $('html').toggleClass('zen');
-      $(textarea).focus();
-    } catch (e) {} 
-    return false; 
-  };
+    var button_theme = document.createElement('button');
+    button_theme.setAttribute('type','button');
+    button_theme.tabIndex = 200;
+    button_theme.className = "jstb_zenedit theme";
+    button_theme.title = title || "Zen";
 
-  button_theme.onclick = function() { 
-    try { 
-      $(this).parent('.jstEditor').toggleClass('dark-theme');
-      $(textarea).focus();
-    } catch (e) {} 
-    return false; 
-  };  
+    document.onkeydown = function(evt) {
+        evt = evt || window.event;
+        if (evt.keyCode === 27) {
+            $('.jstEditor.zen').removeClass('zen');
+            $('html.zen').removeClass('zen');
+        }
+    };
 
-  this.editor.appendChild(button);
-  this.editor.appendChild(button_theme);
+    button.onclick = function() {
+        try {
+            $(this).parent('.jstEditor').toggleClass('zen');
+
+            if($(this).parent('.jstEditor').hasClass('zen')) {
+                $('#sidebar').css('z-index', '-1');
+            } else {
+                $('#sidebar').css('z-index', '12');
+            }
+            $(textarea).removeAttr("style");
+            $('html').toggleClass('zen');
+            $(textarea).focus();
+        } catch (e) {}
+        return false;
+    };
+
+    button_theme.onclick = function() {
+        try {
+            $(this).parent('.jstEditor').toggleClass('dark-theme');
+            $(textarea).focus();
+        } catch (e) {}
+        return false;
+    };
+
+    this.editor.appendChild(button);
+    this.editor.appendChild(button_theme);
 }
