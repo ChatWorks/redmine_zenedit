@@ -43,7 +43,8 @@ function jsZenEdit(textarea, title, placeholder) {
 
   button_theme.onclick = function() { 
     try { 
-      $(this).parent('.jstEditor').toggleClass('dark-theme'); 
+      $(this).parent('.jstEditor').toggleClass('dark-theme');
+      $(this).parent('.jstEditor').find('.jstEditor-preview-header ul li.active a').css('color', '#fff')
       $(textarea).focus();
     } catch (e) {} 
     return false; 

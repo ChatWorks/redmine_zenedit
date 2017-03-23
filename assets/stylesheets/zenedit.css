@@ -91,3 +91,27 @@ button.jstb_zenedit.theme {
 .jstEditor-preview-header ul li.active a {
   color: #fff;
 }
+
+.jstEditor.zen.dark-theme .jstEditor-preview-header { display: inline-block; width: 100%; }
+.jstEditor.zen.dark-theme .jstEditor-preview-header ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.jstEditor.zen.dark-theme .jstEditor-preview-header ul li { float: left; }
+.jstEditor.zen.dark-theme .jstEditor-preview-header ul li a {
+  display: inline-block;
+  padding: 10px;
+  font-size: 12px;
+  line-height: 10px;
+}
+.jstEditor.zen.dark-theme .jstEditor-preview-header ul li a,
+.jstEditor.zen.dark-theme .jstEditor-preview-header ul li a:visited {
+  color: grey;
+}
+
+.jstEditor.zen.dark-theme .jstEditor-preview-header ul li a:hover { text-decoration: none; }
+.jstEditor.zen.dark-theme .jstEditor-preview-header ul li.active a {
+  color: #fff;
+  border-bottom: 4px solid #628DB6;
+}
