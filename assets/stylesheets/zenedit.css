@@ -23,7 +23,7 @@ html.zen {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
-  height: 100%;
+  height: 93%;
   padding: 20px;
   margin-top: 20px;
   border: 0;
@@ -36,7 +36,7 @@ html.zen {
   -webkit-transition: color 0.15s ease-in 0;
   transition: color 0.15s ease-in 0;
   box-shadow: none;
-  max-width: 800px;
+  max-width: 1000px;
   outline: none;
   overflow: auto;
 }
